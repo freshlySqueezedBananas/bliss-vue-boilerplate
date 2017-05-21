@@ -5,7 +5,6 @@
  * Will configure and bootstrap the application.
  */
 
-
 /* ============
  * Vue
  * ============
@@ -18,7 +17,6 @@
 import Vue from 'vue';
 
 Vue.config.debug = process.env.NODE_ENV !== 'production';
-
 
 /* ============
  * Axios
@@ -50,7 +48,6 @@ Object.defineProperty(Vue.prototype, '$http', {
   },
 });
 
-
 /* ============
  * Vuex Router Sync
  * ============
@@ -63,7 +60,6 @@ import VuexRouterSync from 'vuex-router-sync';
 import store from './app/store';
 
 store.dispatch('auth/check');
-
 
 /* ============
  * Vue Router
@@ -107,7 +103,6 @@ VuexRouterSync.sync(store, router);
 
 Vue.router = router;
 
-
 /* ============
  * Vue i18n
  * ============
@@ -128,6 +123,17 @@ export const i18n = new VueI18n({
 });
 
 /* ============
+ * Store.js
+ * ============
+ *
+ * Cross-browser storage for all use cases.
+ * Falls back to one storage method that works in every scenario by default.
+ *
+ * https://github.com/marcuswestin/store.js
+ */
+window.storage = require('store');
+
+/* ============
  * Styling
  * ============
  *
@@ -137,6 +143,8 @@ export const i18n = new VueI18n({
  * If you don't want to use Sass, that's fine!
  * Replace the sass directory with the CSS preprocessor you want.
  * Require the entry point here & install the webpack loader.
+ *
+ * http://sass-lang.com/
  */
 require('./assets/sass/app.scss');
 
