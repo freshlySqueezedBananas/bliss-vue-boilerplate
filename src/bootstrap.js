@@ -155,7 +155,7 @@ require('./assets/sass/app.scss');
  * Register modules globally
  */
 import registerComponents from './app/components/index';
-import registerLayouts from './app/components/index';
+import registerLayouts from './app/layouts/index';
 
 registerComponents();
 registerLayouts();
