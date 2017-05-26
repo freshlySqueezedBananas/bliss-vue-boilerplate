@@ -28,12 +28,12 @@ Vue.config.debug = process.env.NODE_ENV !== 'production';
  *
  * https://github.com/mzabriskie/axios
  */
-import Axios from 'axios';
+import axios from 'axios';
 import authService from '@/app/services/auth';
 
-Axios.defaults.baseURL = process.env.API_LOCATION;
-Axios.defaults.headers.common.Accept = 'application/json';
-Axios.interceptors.response.use(
+axios.defaults.baseURL = process.env.API_LOCATION;
+axios.defaults.headers.common.Accept = 'application/json';
+axios.interceptors.response.use(
   response => response,
   (error) => {
     if (error.response.status === 401) {
@@ -41,10 +41,10 @@ Axios.interceptors.response.use(
     }
   });
 
-Vue.$http = Axios;
+Vue.$http = axios;
 Object.defineProperty(Vue.prototype, '$http', {
   get() {
-    return Axios;
+    return axios;
   },
 });
 
@@ -132,6 +132,26 @@ export const i18n = new VueI18n({
  * https://github.com/marcuswestin/store.js
  */
 window.storage = require('store');
+
+/* ============
+ * Vue Media Query
+ * ============
+ *
+ * Plugin that adds methods for working with media query in Vue
+ *
+ * https://github.com/AStaroverov/v-media-query
+ */
+import vMediaQuery from 'v-media-query';
+
+Vue.use(vMediaQuery.default, {
+  variables: {
+    xs: 0,
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1200
+  }
+});
 
 /* ============
  * Styling
