@@ -76,8 +76,10 @@ import routes from './app/routes';
 Vue.use(VueRouter);
 
 export const router = new VueRouter({
+  mode: 'history',
   routes,
 });
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth) && !store.state.auth.authenticated) {
     /*
@@ -143,9 +145,8 @@ window.storage = require('store');
  */
 import vMediaQuery from 'v-media-query';
 
-Vue.use(vMediaQuery.default, {
+Vue.use(vMediaQuery, {
   variables: {
-    xs: 0,
     sm: 576,
     md: 768,
     lg: 992,
