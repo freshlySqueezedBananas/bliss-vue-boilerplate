@@ -13,7 +13,6 @@
 
   import store from './app/store';
   import { router, i18n } from './bootstrap';
-  import accountService from './app/services/account';
 
   export default {
     /**
@@ -30,16 +29,5 @@
      * The localization plugin
      */
     i18n,
-
-    /**
-     * Fires when the app has been mounted
-     */
-    mounted() {
-      // If the user is authenticated,
-      // fetch the data from the API
-      if (this.$store.state.auth.authenticated) {
-        accountService.find();
-      }
-    },
   };
 </script>

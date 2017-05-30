@@ -29,17 +29,9 @@ Vue.config.debug = process.env.NODE_ENV !== 'production';
  * https://github.com/mzabriskie/axios
  */
 import axios from 'axios';
-import authService from '@/app/services/auth';
 
 axios.defaults.baseURL = process.env.API_LOCATION;
 axios.defaults.headers.common.Accept = 'application/json';
-axios.interceptors.response.use(
-  response => response,
-  (error) => {
-    if (error.response.status === 401) {
-      authService.logout();
-    }
-  });
 
 Vue.$http = axios;
 Object.defineProperty(Vue.prototype, '$http', {
@@ -58,8 +50,6 @@ Object.defineProperty(Vue.prototype, '$http', {
  */
 import VuexRouterSync from 'vuex-router-sync';
 import store from './app/store';
-
-store.dispatch('auth/check');
 
 /* ============
  * Vue Router
@@ -80,27 +70,6 @@ export const router = new VueRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(m => m.meta.auth) && !store.state.auth.authenticated) {
-    /*
-     * If the user is not authenticated and visits
-     * a page that requires authentication, redirect to the login page
-     */
-    next({
-      name: 'login.index',
-    });
-  } else if (to.matched.some(m => m.meta.guest) && store.state.auth.authenticated) {
-    /*
-     * If the user is authenticated and visits
-     * an guest page, redirect to the dashboard page
-     */
-    next({
-      name: 'home.index',
-    });
-  } else {
-    next();
-  }
-});
 VuexRouterSync.sync(store, router);
 
 Vue.router = router;
@@ -133,7 +102,7 @@ export const i18n = new VueI18n({
  *
  * https://github.com/marcuswestin/store.js
  */
-window.storage = require('store');
+window.$storage = require('store');
 
 /* ============
  * Vue Media Query

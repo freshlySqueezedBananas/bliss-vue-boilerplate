@@ -1,0 +1,30 @@
+img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  max-width: 30%;
+  animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat
+{
+  0% {
+    transform: translate(-50%,-50%) scale( .9 );
+  }
+  20% {
+    transform: translate(-50%,-50%) scale( 1 );
+  }
+  40% {
+    transform: translate(-50%,-50%) scale( .9 );
+  }
+  60% {
+    transform: translate(-50%,-50%) scale( 1 );
+  }
+  80% {
+    transform: translate(-50%,-50%) scale( .9 );
+  }
+  100% {
+    transform: translate(-50%,-50%) scale( .9 );
+  }
+}
