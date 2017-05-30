@@ -5,6 +5,8 @@ img {
   transform: translate(-50%,-50%);
   max-width: 30%;
   animation: heartbeat 1s infinite;
+  user-select: none;
+  pointer-events: none;
 }
 
 @keyframes heartbeat
